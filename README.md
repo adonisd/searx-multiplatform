@@ -7,9 +7,9 @@ arm64
 amd64
 armv7 
 
-Once done it will publish to Docker hub https://hub.docker.com/r/wristyquill/searx and to packages on github
+Once done it will publish to Docker hub https://hub.docker.com/r/adonisd/searx and to packages on github
 
 
 To Run:
 
-`docker run -d --name searx -v /home/pi/searx/conf:/etc/searx -v /home/pi/searx/logs:/var/log/uwsgi -p 8080:8080 wristyquill/searx:latest`
+`docker run -d --name searx -v /home/pi/searx/conf:/etc/searx -v /home/pi/searx/logs:/var/log/uwsgi -p 8080:8080 adonisd/searx:latest`
