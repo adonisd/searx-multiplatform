@@ -73,7 +73,7 @@ function multi_arch_docker::build_and_push_all() {
   for tag in $TAGS; do
     multi_arch_docker::buildx -t "$DOCKER_BASE:$tag"
   done
-  multi_arch_docker:buildx -t "$GIT_TAG"
+  multi_arch_docker::buildx -t "$GIT_TAG"
 }
 
 # Test all pushed docker images.
@@ -102,7 +102,7 @@ function multi_arch_docker::build_and_push_all() {
 function multi_arch_docker::main() {
   # Set docker platforms for which to build.
   export DOCKER_PLATFORMS='linux/amd64'
-#   DOCKER_PLATFORMS+=' linux/arm64'
+  DOCKER_PLATFORMS+=' linux/arm64'
   DOCKER_PLATFORMS+=' linux/arm/v7'
 
   export DOCKER_BASE='wristyquill/searx'
