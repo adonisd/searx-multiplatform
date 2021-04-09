@@ -46,7 +46,6 @@ function multi_arch_docker::install_docker_buildx() {
 #   DOCKER_USERNAME ... user name of Docker Hub account
 #   DOCKER_PASSWORD ... password of Docker Hub account
 function multi_arch_docker::login_to_docker_hub() {
-  echo USERNAME: "$DOCKER_USERNAME"
   echo "$DOCKER_PASSWORD" | docker login -u="$DOCKER_USERNAME" --password-stdin
 }
 
@@ -108,11 +107,11 @@ function multi_arch_docker::main() {
 
   export TAGS='latest'
 
-  # multi_arch_docker::install_docker_buildx
+  multi_arch_docker::install_docker_buildx
   multi_arch_docker::login_to_docker_hub
-  # multi_arch_docker::build_and_push_all
-  # set +x
-  # multi_arch_docker::test_all
+  multi_arch_docker::build_and_push_all
+  set +x
+  multi_arch_docker::test_all
 }
 
 multi_arch_docker::main
