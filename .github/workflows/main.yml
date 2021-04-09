@@ -27,4 +27,16 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
+        - run: |
+          # make file runnable, might not be necessary
+          
+
+          # run script
+          "${GITHUB_WORKSPACE}/.github/script.sh"
+      - name: Run a multi-line script
+        env: 
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          chmod +x "${GITHUB_WORKSPACE}/build.sh"
+          "${GITHUB_WORKSPACE}/build.sh"
