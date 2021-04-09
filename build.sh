@@ -111,7 +111,7 @@ function multi_arch_docker::main() {
   DOCKER_PLATFORMS+=' linux/arm64'
   DOCKER_PLATFORMS+=' linux/arm/v7'
 
-  export DOCKER_BASE='wristyquill/searx'
+  export DOCKER_BASE='adonisd/searx'
 
   export TAGS='latest'
   export GIT_TAG='ghcr.io/adonisd/searx:1.0-'
