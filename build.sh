@@ -51,7 +51,7 @@ function multi_arch_docker::login_to_docker_hub() {
 
 function multi_arch_docker::login_to_github() {
   docker logout
-  echo "$GITHUB_TOKEN" | docker login https://docker.pkg.github.com -u adonisd --password-stdin
+  echo $GITHUB_TOKEN | docker login ghcr.io -u adonisd --password-stdin
 }
 # Run buildx build and push.
 # Env:
@@ -114,9 +114,9 @@ function multi_arch_docker::main() {
   export DOCKER_BASE='wristyquill/searx'
 
   export TAGS='latest'
-  export GIT_TAG='docker.pkg.github.com/adonisd/searx-multiplatform/searx:1.0-'
+  export GIT_TAG='ghcr.io/adonisd/searx:1.0-'
   GIT_TAG+="$GITHUB_RUN_NUMBER"
-  
+
   multi_arch_docker::install_docker_buildx
   multi_arch_docker::login_to_docker_hub
   multi_arch_docker::build_and_push_all
