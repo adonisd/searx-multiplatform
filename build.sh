@@ -113,3 +113,5 @@ function multi_arch_docker::main() {
   set +x
   multi_arch_docker::test_all
 }
+
+multi_arch_docker::main
