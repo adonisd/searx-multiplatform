@@ -45,6 +45,7 @@ RUN apk add ca-certificates \
 RUN pip3 install --upgrade pip 
 
 RUN git clone https://github.com/searx/searx.git .
+RUN git config --global advice.detachedHead false
 RUN tag=$(git describe --tags `git rev-list --tags --max-count=1`) && git checkout tags/$tag
 RUN chown -R searx:searx /usr/local/searx
 
