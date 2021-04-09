@@ -29,5 +29,5 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          chmod +x ./build.sh"
-          bash ./build.sh"
+          chmod +x "${GITHUB_WORKSPACE}/build.sh"
+          bash "${GITHUB_WORKSPACE}/build.sh"
