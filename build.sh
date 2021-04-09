@@ -47,9 +47,12 @@ function multi_arch_docker::install_docker_buildx() {
 #   DOCKER_PASSWORD ... password of Docker Hub account
 function multi_arch_docker::login_to_docker_hub() {
   echo "$DOCKER_PASSWORD" | docker login -u="$DOCKER_USERNAME" --password-stdin
-  echo "$GITHUB_TOKEN" | docker login https://docker.pkg.github.com -u adonisd --password-stdin
 }
 
+function multi_arch_docker::login_to_github() {
+  docker logout
+  echo "$GITHUB_TOKEN" | docker login https://docker.pkg.github.com -u adonisd --password-stdin
+}
 # Run buildx build and push.
 # Env:
 #   DOCKER_PLATFORMS ... space separated list of Docker platforms to build.
@@ -73,6 +76,9 @@ function multi_arch_docker::build_and_push_all() {
   for tag in $TAGS; do
     multi_arch_docker::buildx -t "$DOCKER_BASE:$tag"
   done
+}
+
+function multi_arch_docker::build_and_push_github() {
   multi_arch_docker::buildx -t "$GIT_TAG"
 }
 
@@ -108,11 +114,14 @@ function multi_arch_docker::main() {
   export DOCKER_BASE='wristyquill/searx'
 
   export TAGS='latest'
-  export GIT_TAG='docker.pkg.github.com/adonisd/searx-multiplatform/searx:latest'
-
+  export GIT_TAG='docker.pkg.github.com/adonisd/searx-multiplatform/searx:1.0-'
+  GIT_TAG+="$GITHUB_RUN_NUMBER"
+  
   multi_arch_docker::install_docker_buildx
   multi_arch_docker::login_to_docker_hub
   multi_arch_docker::build_and_push_all
+  multi_arch_docker::login_to_github
+  multi_arch_docker::build_and_push_github
   # set +x
   # multi_arch_docker::test_all
 }
