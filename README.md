@@ -1,5 +1,6 @@
 # searx-multiplatform
 Multi platform build file for Searx
+This will fetch the source from searx/searx and build with tag v1.0.0 (If you wish to change that, take a look at the Dockerfile).
 
 Build for amd64:
 
